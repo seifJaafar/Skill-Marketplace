@@ -1,0 +1,75 @@
+/* Centering the form container on the page */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #1E1F2A;
+    /* Light overlay for the background */
+    padding: 20px;
+}
+
+/* Form styling */
+.login-wrapper {
+    backdrop-filter: blur(100px) brightness(200%);
+    width: 100%;
+    max-width: 500px;
+    /* Limiting form width for centered inputs */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    /* Light border */
+}
+
+/* Form elements styling */
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #C9E782;
+}
+
+.login-container {
+    margin-bottom: 15px;
+}
+
+.login-container label {
+    color: #C9E782;
+}
+
+.login-container input,
+.login-container select,
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.login-container dropdown {
+    background: #C9E782;
+    color: #1E1F2A;
+}
+
+
+
+.login-container .btn-primary {
+    background-color: #c9e782a7;
+    color: #1E1F2A;
+    ;
+}
+
+.login-container .btn-primary:hover {
+    background-color: #C9E782;
+    border-color: #004080;
+}
+
+.login_typo a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 0;
+    text-decoration: none;
+    color: #C9E782;
+}

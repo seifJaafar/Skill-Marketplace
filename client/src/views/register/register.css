@@ -1,0 +1,82 @@
+/* Centering the form container on the page */
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #1E1F2A;
+    /* Light overlay for the background */
+    padding: 20px;
+}
+
+/* Form styling */
+.signup-wrapper {
+    backdrop-filter: blur(100px) brightness(200%);
+    width: 100%;
+    max-width: 700px;
+    /* Limiting form width for centered inputs */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    /* Light border */
+}
+
+/* Form elements styling */
+.signup-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #C9E782;
+}
+
+.signup-container {
+    margin-bottom: 15px;
+}
+
+.signup-container label {
+    color: #C9E782;
+}
+
+.signup-container input,
+.signup-container select,
+.signup-container button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.signup-container .dropdown-menu {
+    padding: 5px;
+    width: 100%;
+}
+
+.signup-container .dropdown-menu button {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.signup-container .btn-primary {
+    background-color: #c9e782a7;
+    color: #1E1F2A;
+    ;
+}
+
+.signup-container .btn-primary:hover {
+    background-color: #C9E782;
+    border-color: #004080;
+}
+
+.signup_typo {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 0;
+}
+
+.signup_typo a {
+    text-decoration: none;
+    color: #C9E782;
+}

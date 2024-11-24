@@ -1,0 +1,63 @@
+.quiz-wrapper {
+    max-width: 500px;
+    backdrop-filter: blur(10px) brightness(1.2);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    background-color: rgba(30, 31, 42, 0.9);
+    /* Slight transparency for a polished look */
+}
+
+.quiz-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #1E1F2A;
+    padding: 20px;
+}
+
+.option-container {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    /* Adds space between each option */
+}
+
+.option-container div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.option-container input[type="radio"] {
+    margin-right: 10px;
+    accent-color: #C9E782;
+
+}
+
+.quiz-wrapper button {
+    background-color: #c9e782a7;
+    color: #1E1F2A;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+}
+
+.quiz-wrapper button:disabled {
+    background-color: #888;
+    cursor: not-allowed;
+}
+
+.quiz-wrapper button:hover:not(:disabled) {
+    background-color: #C9E782;
+}
