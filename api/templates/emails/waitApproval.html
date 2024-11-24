@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awaiting Approval</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .email-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .email-header h2 {
+            color: #4CAF50;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .email-content {
+            font-size: 16px;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #888888;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <h2>Welcome to Skill Marketplace</h2>
+        </div>
+        <div class="email-content">
+            <p>Dear {{Name}},</p>
+            <p>Thank you for registering on [Your Platform Name]. We have received your application, and it is currently
+                awaiting approval from our admin team.</p>
+            <p>We will notify you once your account has been approved. In the meantime, if you have any questions, feel
+                free to reach out to us.</p>
+            <p>Thank you for your patience!</p>
+            <p>Best regards,</p>
+            <p>The Skill Marketplace Team</p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 .Skill Marketplace All rights reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>

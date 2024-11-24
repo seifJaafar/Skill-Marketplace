@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Created - Temporary Password</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .email-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .email-header h2 {
+            color: #4CAF50;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .email-content {
+            font-size: 16px;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        .temp-password {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #888888;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <h2>Welcome to Skill Marketplace</h2>
+        </div>
+        <div class="email-content">
+            <p>Dear {{Name}},</p>
+            <p>Your account has been successfully created by the admin on Skill Marketplace. To get started, please use
+                the following temporary password to log in:</p>
+            <p><strong>Your Temporary Password:</strong> <span class="temp-password">{{password}}</span></p>
+            <p>Once logged in, we strongly recommend that you change your password for security purposes.</p>
+            <p>Click the link below to access your account:</p>
+            <p><a href="localhot:3000/login" class="temp-password">Login to Your Account</a></p>
+            <p>If you have any issues or questions, please feel free to contact our support team.</p>
+            <p>Thank you for joining Skill Marketplace!</p>
+            <p>Best regards,</p>
+            <p>The Skill Marketplace Team</p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 Skill Marketplace. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>
