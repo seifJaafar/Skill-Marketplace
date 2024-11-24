@@ -1,0 +1,28 @@
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form-field {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.form-field label {
+    display: block;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+.large-input {
+    width: 50%;
+    font-size: 1.1em;
+    padding: 8px;
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

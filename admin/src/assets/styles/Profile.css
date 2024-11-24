@@ -1,0 +1,106 @@
+.container_1 {
+    position: absolute;
+    top: 0;
+    left: 300px;
+    width: calc(100% - 300px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container_2 {
+    padding: 3% 4%;
+}
+
+.previous_title {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 34px;
+}
+
+.progress_bar_color {
+    background: #ffb703;
+}
+
+.profile_card_container {
+    overflow: hidden;
+}
+
+.form-check-input:checked {
+    background-color: #ffb703 !important;
+    border-color: #ffb703 !important;
+}
+
+.corner_picture3 {
+    height: 110px;
+    width: auto;
+    transform: rotate(180deg);
+}
+
+.progress-bar {
+    background-color: #ffb703 !important;
+}
+
+.profile_card {
+    background: #ffffff;
+    box-shadow: 0px 0px 76px -29px rgba(0, 0, 0, 0.21);
+    border-radius: 20px;
+    min-height: 250px;
+}
+
+.layout-content {
+    margin-top: 20px;
+}
+
+.nav-tabs .nav-link {
+    margin-bottom: 15% !important;
+    color: #1E1F2A;
+    font-size: 16px;
+    border: none !important;
+    padding: 0.75rem 1.5rem;
+    margin-left: 10px;
+}
+
+.nav-tabs .nav-link.active {
+    color: #C9E782 !important;
+    background: #1E1F2A !important;
+    border-radius: 12px !important;
+    font-size: 16px;
+    border: none !important;
+    padding: 0.75rem 1.5rem;
+}
+
+.nav-tabs .nav-link:hover {
+    color: #C9E782 !important;
+    background: #1E1F2A !important;
+    border-radius: 12px !important;
+    font-size: 16px;
+    border: none !important;
+    padding: 0.75rem 1.5rem;
+}
+
+@media (max-width: 992px) {
+    .container_1 {
+        margin-top: 35%;
+        padding: 3% 5% 5% 5%;
+        background-color: transparent;
+    }
+
+    .nav-tabs .nav-link {
+        margin-bottom: 5% !important;
+    }
+
+    .container_2 {
+        padding: 5% 2%;
+    }
+
+    .nav-link.active {
+        color: hsl(44, 100%, 50%) !important;
+        background: rgba(255, 184, 3, 0.162) !important;
+        border-radius: 12px !important;
+        font-size: 14px !important;
+        border: none !important;
+        padding: 0.75rem 1.5rem;
+    }
+}

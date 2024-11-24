@@ -1,0 +1,122 @@
+.sidebar {
+    position: fixed;
+    top: 0px;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    z-index: 996;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #C9E782 transparent;
+    box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
+    background-color: #1E1F2A;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+    height: 8px;
+    background-color: #C9E782;
+}
+
+.sidebar-header {
+    margin: 10px 0 70px 0;
+    font-size: 30px;
+    color: #C9E782;
+}
+
+.sidebar-footer {
+    font-size: 30px;
+    color: #C9E782;
+}
+
+.colabsed {
+    left: -300px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #C9E782;
+    border-radius: 10px;
+}
+
+.sidebar-nav {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    padding: 0;
+    margin-bottom: 10px;
+    list-style: none;
+}
+
+.sidebar-nav .nav-item {
+    margin-bottom: 5px;
+}
+
+.selected {
+    background: #C9E782;
+    color: #1E1F2A;
+}
+
+.selected span {
+    color: #1E1F2A;
+}
+
+.selected i {
+    color: #1E1F2A !important;
+}
+
+.sidebar-nav .nav-link {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #C9E782;
+    transition: 0.3;
+    padding: 10px 15px;
+    border-radius: 4px;
+}
+
+.sidebar-nav .nav-link i {
+    font-size: 16px;
+    margin-right: 10px;
+    color: white;
+}
+
+.sidebar-nav .nav-link.collapsed {
+    color: #C9E782;
+    background-color: #1E1F2A;
+}
+
+.sidebar-nav .nav-link.collapsed i {
+    color: #899bbd;
+}
+
+.sidebar-nav .nav-link:hover {
+    color: #1E1F2A;
+    background: #C9E782;
+}
+
+.sidebar-nav .nav-link:hover i {
+    color: #1E1F2A;
+}
+
+.sidebar-nav .nav-link .bi-chevron-down {
+    margin-right: 0;
+    transition: transform 0.2s ease-in-out;
+}
+
+.sidebar-nav .nav-link:not(.collapsed) .bi-chevron-down {
+    transform: rotate(180deg);
+}
+
+.sidebar-nav .nav-content {
+    padding: 5px 0 0 0;
+    margin: 0;
+}
