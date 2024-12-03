@@ -10,7 +10,6 @@ import { PrimeReactProvider } from 'primereact/api';
 import 'primeflex/primeflex.css';
 import 'primereact/resources/primereact.css';
 import './index.css';
-import './index.css';
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

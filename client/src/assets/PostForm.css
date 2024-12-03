@@ -1,0 +1,47 @@
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form-field {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.form-field label {
+    display: block;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+.large-input {
+    width: 70%;
+    font-size: 1.1em;
+    padding: 8px;
+}
+
+.select-input {
+    width: 100%;
+    font-size: 1.1em;
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 20px;
+}
+
+.p-button-cancel {
+    background-color: #C9E782 !important;
+    color: #1E1F2A !important;
+    border: none;
+    margin-right: 10px;
+}
+
+.p-button-submit {
+    background-color: #1E1F2A !important;
+    color: #C9E782 !important;
+    border: none;
+}

@@ -1,0 +1,13 @@
+.layout-main {
+    position: absolute;
+    top: 0;
+    left: 300px;
+    width: calc(100% - 300px);
+    justify-content: center;
+    align-items: center;
+  
+  }
+  
+  .layout-content {
+    margin: 10px;
+  }

@@ -1,0 +1,98 @@
+.col-12 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 80%;
+    /* Ensure card spans full width */
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.truncated-description {
+    white-space: nowrap;
+    /* Prevent text from wrapping */
+    overflow: hidden;
+    /* Hide the overflowed text */
+    text-overflow: ellipsis;
+    /* Add "..." at the end of the truncated text */
+    max-width: 100%;
+    /* Ensure the text stays within the available width */
+}
+
+.truncated-text {
+    display: -webkit-box;
+    /* Enable flexible box layout */
+    -webkit-box-orient: vertical;
+    /* Make the box layout vertical */
+    -webkit-line-clamp: 2;
+    /* Limit text to 2 lines with webkit */
+    overflow: hidden;
+    /* Hide the overflow text */
+    text-overflow: ellipsis;
+    /* Display ellipsis (...) when text is truncated */
+
+    /* Standard line-clamp (not widely supported yet, used as a fallback) */
+    line-clamp: 2;
+    /* Standard property for limiting lines (not fully supported) */
+
+    line-height: 1.5em;
+    /* Adjust line height as per your font size */
+    height: 3em;
+    /* Ensure container height is exactly 2 lines worth of text */
+}
+
+.p-button {
+    background-color: #C9E782;
+    color: #1E1F2A;
+    border: none;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.p-4 {
+    padding: 1rem;
+    /* Adjust if padding causes extra space */
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.grid {
+    justify-content: center !important;
+}
+
+.custom-card {
+    background-color: #1E1F2A;
+    color: #FFFFFF;
+    /* Text color for better readability */
+    border-radius: 8px;
+    /* Optional: Rounded corners */
+    padding: 16px;
+    /* Optional: Adjust padding for better spacing */
+    word-break: break-word;
+    /* Forces long words to break if needed */
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+
+.custom-card .text-900 {
+    color: #FFFFFF;
+    /* Override text color for title */
+}
+
+.custom-card .text-700,
+.custom-card .text-500 {
+    color: #B3B3B3;
+    /* Optional: Softer text color for descriptions */
+}

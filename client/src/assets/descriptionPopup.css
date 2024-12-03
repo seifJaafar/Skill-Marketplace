@@ -1,0 +1,15 @@
+.description-popup-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+}
+
+.description-popup-content p {
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    line-height: 1.6; /* For better readability */
+    margin: 0;
+}

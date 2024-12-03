@@ -8,10 +8,10 @@ import Register from "../views/register/Register";
 import QuizComponent from "../views/quiz/QuizComponent";
 import Login from "../views/login/Login"
 import SkillProviderDashboard from "../views/Dashboards/SkillProviderDashboard";
-import Propositions from "../views/propositions/Propositions";
+import SkillPost from "../views/SkillPosts/SkillPost";
+import SkillPostInformation from "../views/SkillPosts/SkillPostInformation";
 import ResetPassword from "../views/ResetPassword/ResetPassword";
-
-
+import Jobs from "../views/jobs/Jobs";
 
 function MainRoutesComponent() {
   const [user, setUser] = useState({});
@@ -63,7 +63,7 @@ function MainRoutesComponent() {
   useEffect(() => {
 
     fetchData();
-  });
+  }, []);
   if (loading) {
     return <Spinner />;
   }
@@ -97,9 +97,11 @@ const SkillProviderRoutes = (props) => {
 
   return (
     <Routes>
-      <Route element={<SkillProviderDashboard />} >
-        <Route path="/propositions" element={<Propositions />} />
-        <Route path="/*" element={<Navigate to="/propositions" />} />
+      <Route element={<SkillProviderDashboard user={user._id} />} >
+        <Route path="/skillposts" element={<SkillPost skills={user.skills} name={user.username} />} />
+        <Route path="/skillpost/:id" element={<SkillPostInformation userId={user._id} />} />
+        <Route path="/jobs" element={<Jobs />} />
+        <Route path="/*" element={<Navigate to="/skillposts" />} />
       </Route>
 
     </Routes>

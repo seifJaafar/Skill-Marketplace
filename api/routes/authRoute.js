@@ -12,6 +12,7 @@ router.route('/quiz-Result').post(authController.handleQuizResult);
 router.route('/register').post(validateSignUp, authController.Register);
 router.route('/addUser').post(authorize(), roleAuthorize('admin'), validateaddUser, authController.addUser);
 router.route('/login').post(authController.LogIn);
+router.route("/users").get(authorize(),roleAuthorize(['admin','skillprovider']), authController.getUsersPublicInfos);    
 router.route('/bytoken').get(authorize(), authController.ByToken);
 router.route('/resetpassword').post(validateEmail, authController.ResetPassword);
 router.route('/:id').patch(authorize(), roleAuthorize("admin"), validateaddUser, authController.UpdateUser)

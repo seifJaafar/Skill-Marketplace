@@ -125,7 +125,7 @@ exports.ResetPassword = async (req, res, next) => {
 }
 exports.ByToken = async (req, res, next) => {
     try {
-        const user = await User.findById(req.user.sub);
+        const user = await User.findById(req.user.sub).populate('skills');
         const data = {
             user: user
         }
@@ -173,6 +173,19 @@ exports.UpdateUser = async (req, res, next) => {
             throw new ExpressError(msg, 400);
         }
         const data = { message: "User Updated succefuly" };
+        return apiJson({ req, res, data, model: User });
+    } catch (err) {
+        next(err);
+    }
+}
+exports.getUsersPublicInfos = async (req, res, next) => {
+    try {
+        const users = await User.find({
+            approved: true,
+            role: { $ne: "admin" },
+            _id: { $ne: req.user.sub }
+        }).select('username email role phone githubProfile linkedinProfile points skills').populate('skills', 'name');
+        const data = { users };
         return apiJson({ req, res, data, model: User });
     } catch (err) {
         next(err);

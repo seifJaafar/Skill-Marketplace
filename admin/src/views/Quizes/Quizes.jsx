@@ -186,7 +186,7 @@ function Quizes() {
                                         first={first}
                                         onPage={onPage}
                                         filters={filters}
-                                        globalFilterFields={['name']}
+                                        globalFilterFields={['title', 'skill.name']}
                                         header={header}
                                         emptyMessage="No Quiz was found">
                                         <Column field="title" filterField="title" header="Title" body={NameValueRender} />

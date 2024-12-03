@@ -1,0 +1,187 @@
+/* Style for the Conversation List Container */
+.conversation-list {
+  width: 300px;
+  height: 500px;
+  background-color: #1E1F2A;
+  color: white;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  position: relative;
+  overflow-y: auto;
+  /* Enables vertical scrolling */
+  overflow-x: hidden;
+  /* Prevents horizontal scrolling */
+}
+
+/* Heading style for the conversation list */
+.conversation-list h3 {
+  font-size: 30px;
+  color: #C9E782;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+/* Container for the chat list items */
+.conversation-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* Individual chat item styling */
+.chat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 100%;
+}
+
+.rce-citem {
+  padding: 10px;
+  background-color: #1b1c2b !important;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 5px 0;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: 2px solid white;
+}
+
+.rce-citem:hover {
+  background-color: #C9E782 !important;
+  transform: scale(1.02) !important;
+  color: #1E1F2A !important;
+  border-radius: 10px;
+}
+
+.rce-citem:hover .rce-citem-body--top-time,
+.rce-citem:hover .rce-citem-body--bottom-title {
+  color: #1E1F2A !important;
+}
+
+/* Styling for each conversation card */
+.chat-list .chat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  position: relative;
+}
+
+.rce-citem-body--top-time,
+.rce-citem-body--bottom-title {
+  color: white !important;
+}
+
+/* Hover effect for conversation cards */
+.chat-list .chat-item:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.02);
+}
+
+.rce-citem-avatar {
+  display: none !important;
+}
+
+.rce-citem-body {
+  align-items: flex-start;
+}
+
+.rce-citem-body--top {
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  text-align: left;
+}
+
+/* Text section in chat item */
+.chat-item .text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+/* Title style - conversation username */
+.chat-item .text-container .title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+/* Subtitle style - last message content */
+.chat-item .text-container .subtitle {
+  font-size: 14px;
+  color: #888;
+  max-width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Timestamp styling for last message */
+.chat-item .text-container .timestamp {
+  font-size: 12px;
+  color: #bbb;
+  text-align: right;
+}
+
+/* Unread message badge */
+.chat-item .unread-badge {
+  background-color: #007bff;
+  color: white;
+  font-size: 12px;
+  padding: 3px 7px;
+  border-radius: 12px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+/* Empty state when no conversations are available */
+.conversation-list p {
+  color: #888;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* Scrollbar for conversation list */
+.conversation-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.conversation-list::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.conversation-list::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+.conversation-list.collapsed .conversation-container {
+  display: none;
+ 
+}
+
+.toggle-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.toggle-button:hover {
+  background-color: #0056b3;
+}

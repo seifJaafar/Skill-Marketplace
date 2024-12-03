@@ -1,14 +1,16 @@
 import SideBar from "../../partials/Sidebar";
 import { Outlet } from 'react-router-dom';
 import { SidebarProvider } from "../../partials/SidebarContext";
+import MessengerComponent from "../Messenger/MessengerComponent";
+import "../../assets/layout.css"
 
-
-function SkillProviderDashboard() {
+function SkillProviderDashboard({ user }) {
     return (
         <>
             <SidebarProvider>
                 <SideBar />
                 <Outlet />
+                <MessengerComponent user={user} />
             </SidebarProvider>
         </>
     )

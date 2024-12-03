@@ -1,0 +1,91 @@
+.datatable-custom .p-datatable-header,
+.datatable-custom .p-datatable-thead>tr>th {
+    background-color: #444444;
+    color: #C9E782;
+    max-height: 200px;
+    /* Set desirpxed height for the table */
+    overflow-y: auto;
+}
+
+.datatable-custom .p-datatable-tbody>tr {
+    background-color: #2b2b2b;
+    color: #e0e0e0;
+}
+
+/* Dark theme styling for the DataTable search input filter */
+.datatable-custom .p-inputtext {
+    background-color: #2b2b2b;
+    /* Dark background color */
+    color: #e0e0e0;
+    /* Light text color */
+    border: 1px solid #444444;
+
+}
+
+.datatable-custom .p-inputtext::placeholder {
+    color: #c0c0c0;
+    /* Placeholder text color */
+}
+
+.datatable-custom .p-inputtext:focus {
+    border-color: #C9E782;
+    /* Highlighted border color on focus */
+    box-shadow: 0 0 5px rgba(201, 231, 130, 0.5);
+    /* Light green glow effect */
+}
+
+/* Button styling to match the dark theme */
+.p-button-submit {
+    background-color: #444444;
+    /* Dark button color */
+    color: #C9E782;
+    /* Text color */
+    border: none;
+    /* Remove border */
+}
+
+.p-button-submit:hover {
+    background-color: #555555;
+    /* Slightly lighter on hover */
+    color: #e0e0e0;
+}
+
+.datatable-custom .p-datatable-tbody>tr:nth-child(even) {
+    background-color: #3c3c3c;
+}
+
+.datatable-custom .p-datatable-tbody>tr:hover {
+    background-color: #555555;
+}
+
+.custom-table-cell {
+    width: 100%;
+    color: #e0e0e0;
+}
+
+.custom-column-header {
+    background-color: #444444;
+    color: #ffffff;
+    text-align: left;
+}
+
+.datatable-custom .p-datatable-tbody>tr>td,
+.datatable-custom .p-datatable-thead>tr>th {
+    border-left: 1px solid #555555;
+
+}
+
+.datatable-custom .p-datatable-tbody>tr>td:last-child,
+.datatable-custom .p-datatable-thead>tr>th:last-child {
+    border-right: none;
+
+}
+
+
+.datatable-custom .p-datatable-tbody>tr>td,
+.datatable-custom .p-datatable-thead>tr>th {
+    border-color: #555555;
+    border-style: solid;
+    border-width: 0 1px 0 0;
+
+}

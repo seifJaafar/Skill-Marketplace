@@ -25,7 +25,7 @@ const schema = joi.object({
     'array.includesRequiredUnknowns': 'Skills array cannot be empty',
   }),
 
-  // Conditional validation for GitHub and LinkedIn profiles
+
   githubProfile: joi.when('role', {
     is: 'skillexpert',
     then: joi.string()

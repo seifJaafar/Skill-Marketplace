@@ -16,7 +16,7 @@ function SideBar() {
             <div className="d-flex flex-column justify-content-between">
                 <aside id="sidebar" className={`sidebar ${collapsed ? ' collapsed' : ''}`}>
                     <div>
-                        <h1 className="sidebar-header text-center">Medicis</h1>
+                        <h1 className="sidebar-header text-center">Skill Marketplace</h1>
                         <ul className="sidebar-nav" id="sidebar-nav">
                             {NavList.map((item) => {
                                 return (
@@ -32,14 +32,14 @@ function SideBar() {
                     </div>
                     <div>
                         <ul className="sidebar-nav" id="sidebar-nav">
+
                             <li className={selected === "Settings" ? 'selected' : ''}>
-                                <Link className="nav-link" to="/profile" onClick={() => setSelected("Settings")}>
+                                <Link className="nav-link" to="/profile">
                                     <i className="fa-solid fa-cog"></i>
                                     <span>Profile</span>
                                 </Link>
                             </li>
                             <li className={selected === "logout" ? 'selected' : ''}>
-
                                 <Link className="nav-link" to="/" onClick={() => { logout() }}>
                                     <i className="fa-solid fa-sign-out"></i>
                                     <span>Logout</span>

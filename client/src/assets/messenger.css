@@ -1,0 +1,177 @@
+/* Container for the entire messenger */
+.app-container {
+    display: flex;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    max-width: 80vw;
+}
+
+/* Container for the conversation list */
+.conversation-list-container {
+    width: 300px;
+    /* Fixed width for the conversation list */
+    height: 500px;
+    /* Fixed height */
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #1E1F2A;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 1;
+    position: relative;
+}
+
+/* Fixed container for the message component */
+.message-component-container {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+
+    height: 500px;
+
+    overflow-y: auto;
+    margin-left: 20px;
+
+    background-color: #1E1F2A;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+/* When a conversation is selected, show the message component */
+.message-component-container.show {
+    display: block;
+}
+
+/* Styling for the conversation cards */
+.conversation-card {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f7f7f7;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.conversation-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Header for each conversation */
+.conversation-header h5 {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Message input area */
+.input-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
+/* Message input */
+.p-inputtextarea {
+    width: 80%;
+    margin-right: 10px;
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f4f4f4;
+    resize: none;
+}
+
+.p-inputtextarea:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+/* Send button */
+.send-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10px 15px;
+}
+
+.send-button:hover {
+    background-color: #0056b3;
+}
+
+
+.messages-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.messages-list::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+.messages-list::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+/* Compact view for small screens */
+@media (max-width: 768px) {
+    .conversation-list-container {
+        width: 250px;
+    }
+
+    .message-component-container {
+        width: 280px;
+    }
+
+    .p-inputtextarea {
+        width: 70%;
+    }
+
+    .send-button {
+        width: 20%;
+    }
+}
+
+.conversation-list-container.collapsed {
+    width: 100%;
+    /* Fixed width for the conversation list */
+    height: 100%;
+    /* Fixed height */
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-color: #1E1F2A;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 1;
+    position: relative;
+}
+
+.message-component-container.collapsed {
+    flex: 0 0 60px;
+    /* Collapsed size for the container */
+    overflow: hidden;
+    background-color: #1E1F2A;
+    justify-content: center;
+    align-items: center;
+}
+
+.message-component-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.message-component-container p {
+    margin: 0;
+    text-align: center;
+}

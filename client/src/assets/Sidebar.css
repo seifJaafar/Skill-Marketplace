@@ -12,26 +12,26 @@
     padding: 20px;
     overflow-y: auto;
     scrollbar-width: thin;
-    scrollbar-color: #adbfde transparent;
+    scrollbar-color: #C9E782 transparent;
     box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
-    background-color: #023047;
+    background-color: #1E1F2A;
 }
 
 .sidebar::-webkit-scrollbar {
     width: 5px;
     height: 8px;
-    background-color: #fff;
+    background-color: #C9E782;
 }
 
 .sidebar-header {
     margin: 10px 0 70px 0;
     font-size: 30px;
-    color: #fff;
+    color: #C9E782;
 }
 
 .sidebar-footer {
     font-size: 30px;
-    color: #fff;
+    color: #C9E782;
 }
 
 .colabsed {
@@ -39,7 +39,7 @@
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-    background-color: #aab7cf;
+    background-color: #C9E782;
     border-radius: 10px;
 }
 
@@ -60,15 +60,16 @@
 }
 
 .selected {
-    background: #f6f9ff;
+    background: #C9E782;
+    color: #1E1F2A;
 }
 
 .selected span {
-    color: #4154f1;
+    color: #1E1F2A;
 }
 
 .selected i {
-    color: #4154f1 !important;
+    color: #1E1F2A !important;
 }
 
 .sidebar-nav .nav-link {
@@ -76,7 +77,7 @@
     align-items: center;
     font-size: 16px;
     font-weight: 600;
-    color: #8ba1b7;
+    color: #C9E782;
     transition: 0.3;
     padding: 10px 15px;
     border-radius: 4px;
@@ -89,8 +90,8 @@
 }
 
 .sidebar-nav .nav-link.collapsed {
-    color: #012970;
-    background-color: #fff;
+    color: #C9E782;
+    background-color: #1E1F2A;
 }
 
 .sidebar-nav .nav-link.collapsed i {
@@ -98,12 +99,12 @@
 }
 
 .sidebar-nav .nav-link:hover {
-    color: #4154f1;
-    background: #f6f9ff;
+    color: #1E1F2A;
+    background: #C9E782;
 }
 
 .sidebar-nav .nav-link:hover i {
-    color: #4154f1;
+    color: #1E1F2A;
 }
 
 .sidebar-nav .nav-link .bi-chevron-down {

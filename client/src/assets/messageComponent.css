@@ -1,0 +1,147 @@
+/* Container for the entire message component */
+.message-container {
+    width: 100%;
+    max-width: 600px;
+    height: 100%;
+    background-color: #1E1F2A;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    position: relative;
+}
+
+/* Container for the messages list */
+.messages-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+/* Styling the send message button */
+.send-button {
+    margin-top: 10px;
+    align-self: flex-end;
+    width: auto;
+    background-color: #C9E782 !important;
+    color: #1E1F2A !important;
+    min-width: 120px;
+}
+
+/* Input container with text area for message input */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* Styling the message list */
+.message-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-x: hidden;
+}
+
+.rce-mlist {
+    overflow-x: hidden !important;
+}
+
+/* Styling individual messages */
+.message-list .chat-item {
+    background-color: #f1f1f1;
+    border-radius: 15px;
+    padding: 10px 15px;
+    max-width: 70%;
+    word-wrap: break-word;
+    position: relative;
+}
+
+/* Messages from the user (right aligned) */
+.message-list .chat-item.right {
+    background-color: #007bff;
+    color: white;
+    align-self: flex-end;
+}
+
+/* Messages from others (left aligned) */
+.message-list .chat-item.left {
+    background-color: #e4e6eb;
+    color: #333;
+    align-self: flex-start;
+}
+
+/* Avatar style */
+.message-list .chat-item .avatar {
+    position: absolute;
+    top: -5px;
+    left: -35px;
+}
+
+/* Text style for message sender's name */
+.message-list .chat-item .title {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+/* Timestamp for messages */
+.message-list .chat-item .timestamp {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 5px;
+    text-align: right;
+}
+
+/* Scrollbar styles for the messages list */
+.message-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.message-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+.message-container::-webkit-scrollbar-thumb:hover {
+    background-color: #999;
+}
+
+/* Placeholder for the input textarea */
+.input-container .p-inputtextarea {
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 14px;
+    resize: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Send button styling */
+.input-container .p-button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-size: 14px;
+    border-radius: 25px;
+    padding: 8px 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+.input-container .p-button:hover {
+    background-color: #0056b3;
+}
+
+.message-container.collapsed {
+    width: 100%;
+    height: 100%;
+    background-color: #1E1F2A;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    position: relative;
+}

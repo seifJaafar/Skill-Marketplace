@@ -15,6 +15,15 @@ export async function GetUserByToken() {
     return { error: error?.response?.data?.message };
   }
 }
+export async function GetAllUsers() {
+  try {
+    const response = await axios.get(`/auth/users`);
+    return response.data.data.users;
+  } catch (error) {
+    console.error(error?.response);
+    return { error: error?.response?.data?.message };
+  }
+}
 export async function RegisterUser(Newuser,) {
   try {
     const response = await axios.post(`/auth/register`, Newuser);

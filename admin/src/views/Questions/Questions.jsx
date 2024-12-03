@@ -197,11 +197,11 @@ function Questions() {
                                         first={first}
                                         onPage={onPage}
                                         filters={filters}
-                                        globalFilterFields={['name']}
+                                        globalFilterFields={['questionText']}
                                         header={header}
                                         emptyMessage="No Quiz was found">
-                                        <Column field="Question" filterField="Question" header="QuestionText" body={TextValueRender} />
-                                        <Column field="Options" Header="Answers" body={actionBodyTemplateAnswers} />
+                                        <Column field="questionText" filterField="Question" header="QuestionText" body={TextValueRender} />
+                                        <Column field="options" header="Options" body={actionBodyTemplateAnswers} />
                                         <Column field="correctAnswerIndex" header="correct Answer Index" body={correctAnswerIndexRender} />
                                         <Column body={actionBodyTemplate} headerClassName='custom-column-header' className='custom-table-cell' />
                                     </DataTable>

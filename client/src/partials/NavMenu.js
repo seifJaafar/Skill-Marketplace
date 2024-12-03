@@ -2,15 +2,15 @@ const NavList = [
 
     {
         _id: 1,
-        name: 'Propositions',
-        icon: "fa-solid fa-database",
-        link: "/propositions"
+        name: 'Skill Posts',
+        icon: "fa-solid fa-signs-post",
+        link: "/skillposts"
     },
     {
         _id: 2,
-        name: 'Références',
-        icon: "fa-solid fa-book",
-        link: "/references"
+        name: 'Projects',
+        icon: "fa-solid fa-briefcase",
+        link: "/jobs"
     }
 ]
 module.exports = NavList;
