@@ -1,0 +1,66 @@
+Guide d'Utilisation du Projet Skill Marketplace
+Pré-requis
+Installer MongoDB
+Téléchargez et installez MongoDB depuis le site officiel.
+
+Installer Node.js
+Téléchargez et installez Node.js depuis le site officiel.
+
+Installer Stripe CLI
+Téléchargez et installez Stripe CLI depuis le site officiel.
+
+Configurez un compte Stripe et récupérez vos clés API.
+Configurez les variables d'environnement nécessaires.
+Étapes d'installation
+Créer une base de données MongoDB :
+
+Nom : SkillMarketplace.
+Configurer les dossiers du projet :
+
+Accédez à chaque dossier via le terminal :
+bash
+Copier le code
+cd <nom_du_dossier>
+Installez les dépendances pour chaque dossier :
+bash
+Copier le code
+npm install
+Configurer les fichiers .env :
+
+Ajoutez vos clés et URL dans les fichiers .env de chaque dossier.
+Variables importantes à définir :
+Connexion à la base de données MongoDB.
+Clés Stripe (incluant le secret Webhook fourni).
+Ajout du premier compte administrateur
+Accédez au dossier api dans le terminal :
+bash
+Copier le code
+cd api/
+Exécutez le script suivant pour ajouter le compte administrateur :
+node AddFirst.js
+Lancer les différentes parties du projet
+API Backend :
+bash
+Copier le code
+npm run dev
+Interface Administrateur :
+bash
+Copier le code
+npm run start
+Interface Client :
+bash
+Copier le code
+npm run start
+Configurer et exécuter le Webhook Stripe
+Se connecter à Stripe CLI :
+bash
+Copier le code
+stripe login
+Lancer le Webhook Stripe :
+bash
+Copier le code
+stripe listen --forward-to http://localhost:5000/webhook/stripe
+Stripe génère un secret Webhook Code. Ajoutez ce code dans le fichier .env du dossier api sous la clé appropriée.
+Remarque
+Si vous rencontrez des problèmes d'exécution, contactez :
+Email : jaafarseif@yahoo.com

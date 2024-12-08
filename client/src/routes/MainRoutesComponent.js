@@ -19,8 +19,10 @@ import Profile from "../views/profile/Profile";
 import LeaderBoard from "../views/LeaderBoard/LeaderBoard";
 import PublicProfile from "../views/PublicProfile/PublicProfile";
 import Shop from "../views/courses/Shop";
-import CourseDetails from "../views/courses/CourseDetails";
+import CourseDeatailsWrapper from "../views/courses/CourseDeatailsWrapper";
+import Enrollements from "../views/Enrollements/Enrollements";
 import AddChapter from "../views/courses/AddChapter";
+import LearningComponent from "../views/Enrollements/LearningComponent";
 function MainRoutesComponent() {
   const [user, setUser] = useState({});
   const [is_connected, setIsConnected] = useState(false)
@@ -131,7 +133,7 @@ const SkillExpertRoutes = (props) => {
         <Route path="/quiz/:skillID" element={<QuizComponent />} />
         <Route path="/leaderboard" element={<LeaderBoard user={user} />} />
         <Route path="/shop" element={<Shop user={user} />} />
-        <Route path="/course/:id" element={<CourseDetails userId={user._id} />} />
+        <Route path="/course/:id" element={<CourseDeatailsWrapper user={user} />} />
         <Route path="/addChapter/:id" element={<AddChapter userId={user._id} />} />
         <Route path="/*" element={<Navigate to="/skillposts" />} />
       </Route>
@@ -161,7 +163,9 @@ const SkillProviderRoutes = (props) => {
         <Route path="/quiz/:skillID" element={<QuizComponent />} />
         <Route path="/leaderboard" element={<LeaderBoard user={user} />} />
         <Route path="/shop" element={<Shop user={user} />} />
-        <Route path="/course/:id" element={<CourseDetails userId={user._id} />} />
+        <Route path="/course/:id" element={<CourseDeatailsWrapper userId={user} />} />
+        <Route path='/mycourses' element={<Enrollements user={user} />} />
+        <Route path='/learn/:id' element={<LearningComponent />} />
         <Route path="/*" element={<Navigate to="/skillposts" />} />
       </Route>
     </Routes>

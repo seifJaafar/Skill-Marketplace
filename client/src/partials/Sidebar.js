@@ -20,6 +20,7 @@ function SideBar({ user }) {
                         <ul className="sidebar-nav" id="sidebar-nav">
                             {NavList.map((item) => {
                                 return (
+                                    
                                     <li key={item._id} className={selected === item.name ? 'selected' : ''}>
                                         <Link className="nav-link" to={item.link} onClick={() => setSelected(item.name)}>
                                             <i className={item.icon}></i>

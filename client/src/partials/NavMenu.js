@@ -24,6 +24,12 @@ const NavList = [
         icon: "fa-solid fa-cart-shopping",
         link: "/shop"
 
+    },
+    {
+        _id: 5,
+        name: 'My Courses',
+        icon: "fa-solid fa-book",
+        link: "/mycourses"
     }
 ]
 module.exports = NavList;

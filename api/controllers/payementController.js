@@ -2,8 +2,9 @@
 const stripe = require('../utils/stripeConfig')
 const Job = require('../models/job')
 const User = require('../models/User');
-
-
+const Course = require('../models/course');
+const Enrollment = require("../models/enrollement");
+const Transaction = require("../models/transaction");
 const requestRefund = async (req, res, next) => {
     const { jobId } = req.body;
     try {
@@ -73,7 +74,86 @@ const requestRefund = async (req, res, next) => {
         next(error);
     }
 };
+const SaveEnrollment = async (req, res, next) => {
+    try {
+        const { paymentIntentId, courseId } = req.body;
 
+        const payementIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+
+        // Check if payementIntent exists and has a valid status
+        if (!payementIntent || !payementIntent.status) {
+            return res.status(400).json({ error: "Invalid payment intent" });
+        }
+
+        const userId = req.user.sub;
+        const courseDoc = await Course.findById(courseId);
+        if (!courseDoc) {
+            return res.status(404).send({ error: 'Course not found' });
+        }
+        const enroll = await Enrollment.findOne({ user: userId, course: courseId });
+        if (enroll) {
+            return res.status(400).send({ error: 'You already enrolled in this course' });
+        }
+        if (payementIntent.status === "succeeded") {
+            const enroll = new Enrollment({
+                user: userId,
+                course: courseId,
+            });
+            await enroll.save();
+            const transaction = new Transaction({
+                user: userId,
+                type: "enrollment",
+                course: courseId,
+                amount: courseDoc.price,
+                status: "pending",
+                payementIntentId: payementIntent.id
+            });
+            await transaction.save();
+            courseDoc.usersEnrolled = courseDoc.usersEnrolled + 1;
+            await courseDoc.save();
+            const user = await User.findById(userId)
+            user.enrollments.push(enroll._id);
+            await user.save();
+            res.status(201).json({ message: 'Enrollment saved successfully' });
+        }
+        else {
+            return res.status(400).send({ error: 'Payment not succeeded' });
+        }
+    } catch (error) {
+        console.error('Error saving enrollment:', error);
+        next(error);
+    }
+}
+const CourseCreatePaymentIntent = async (req, res, next) => {
+    const { courseId } = req.body;
+
+    try {
+        const userId = req.user.sub;
+        const courseDoc = await Course.findById(courseId);
+        if (!courseDoc) {
+            return res.status(404).send({ error: 'Course not found' });
+        }
+        const enroll = await Enrollment.findOne({ user: userId, course: courseId });
+        if (enroll) {
+            return res.status(400).send({ error: 'You already enrolled in this course' });
+        }
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: courseDoc.price * 100,
+            currency: 'usd',
+            metadata: { courseId: String(courseDoc._id) },
+        });
+        if (!paymentIntent) {
+            return res.status(400).send({ error: 'Payment intent not created' });
+        }
+        res.status(201).json({
+            clientSecret: paymentIntent.client_secret,
+        });
+
+    } catch (error) {
+        console.error('Error creating payment intent:', error);
+        next(error);
+    }
+}
 const createPaymentIntent = async (req, res, next) => {
     const { jobId } = req.body;
 
@@ -256,5 +336,7 @@ module.exports = {
     createPaymentIntent,
     markJobAsPaid,
     markJobAsDone,
-    requestRefund
+    requestRefund,
+    CourseCreatePaymentIntent,
+    SaveEnrollment
 };

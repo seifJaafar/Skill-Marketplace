@@ -1,4 +1,4 @@
-import SideBar from "../../partials/Sidebar";
+import SIdebarClient from "../../partials/SIdebarClient";
 import { Outlet } from 'react-router-dom';
 import { SidebarProvider } from "../../partials/SidebarContext";
 import MessengerComponent from "../Messenger/MessengerComponent";
@@ -8,7 +8,7 @@ function ClientDashboard({ user }) {
     return (
         <>
             <SidebarProvider>
-                <SideBar user={user} />
+                <SIdebarClient user={user} />
                 <Outlet />
                 <MessengerComponent user={user} />
             </SidebarProvider>

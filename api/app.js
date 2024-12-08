@@ -14,6 +14,7 @@ const jobRoute = require('./routes/jobRoute');
 const payementRoute = require('./routes/payementRoute');
 const webhookRoute = require('./routes/webhookRoute');
 const coursesRoute = require('./routes/coursesRoute');
+const enrollementRoute = require('./routes/enrollRoute')
 const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
@@ -48,6 +49,7 @@ app.use('/job', jobRoute);
 app.use('/payment', payementRoute);
 app.use('/webhook', webhookRoute);
 app.use('/courses', coursesRoute);
+app.use('/enrollement', enrollementRoute)
 /*------------------ERROR HANDLING-------------------*/
 app.use((err, req, res, next) => {
     const { status = 500 } = err;

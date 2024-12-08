@@ -14,10 +14,9 @@ import { GetCourseById } from "../../actions/courses.action";
 import '../../assets/CourseDetails.css';
 import { InputNumber } from 'primereact/inputnumber';
 import { DeleteFile, UpdateFile, DeleteChapter, UpdateChapter, UpdateCourse, DeleteCourse } from "../../actions/courses.action";
+import { verifyEnrollment } from "../../actions/enrollement.action"
 
-
-function CourseDetails({ userId }) {
-    const { id } = useParams();
+function CourseDetails({ userId, onPay, id }) {
     const [course, setCourse] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
     const [editedCourse, setEditedCourse] = useState({});
@@ -27,6 +26,7 @@ function CourseDetails({ userId }) {
     const [editedFileTitle, setEditedFileTitle] = useState('');
     const [editedFileOrder, setEditedFileOrder] = useState(1);
     const [newFiles, setNewFiles] = useState([])
+    const [enrolled, setEnrolled] = useState(false)
 
     const fetchCourse = async (id) => {
         const response = await GetCourseById(id);
@@ -35,14 +35,20 @@ function CourseDetails({ userId }) {
             setEditedCourse(response.course);
         }
     };
+    const checkEnrollment = async (id) => {
+        const response = await verifyEnrollment(id);
+        if (response) {
+            setEnrolled(response)
+        }
+    }
 
     useEffect(() => {
         fetchCourse(id);
+        checkEnrollment(id);
     }, [id]);
 
     const sortChapters = (chapters) => {
         if (!chapters || chapters.length === 0) return [];
-        console.log("Chapters:", chapters);
         const firstChapter = chapters.find((chapter) => !chapter.previousChapter);
         if (!firstChapter) return [];
         const orderedChapters = [];
@@ -51,7 +57,6 @@ function CourseDetails({ userId }) {
             orderedChapters.push(currentChapter);
             currentChapter = chapters.find((chapter) => chapter.previousChapter === currentChapter._id);
         }
-        console.log("Ordered Chapters:", orderedChapters);
         return orderedChapters;
     };
 
@@ -72,7 +77,6 @@ function CourseDetails({ userId }) {
                 price: editedCourse.price,
                 skillTags: editedCourse.skillTags,
             };
-            console.log("Saving updated course", newEditedCourse);
             const response = await UpdateCourse(course._id, newEditedCourse);
             if (response?.error) {
                 toast.error(response.error);
@@ -95,7 +99,6 @@ function CourseDetails({ userId }) {
                     toast.success("Course deleted successfully");
                     window.location.href = "/courses";
                 }
-                console.log('Course deleted successfully');
             } catch (err) {
                 console.error('Error deleting course:', err);
             }
@@ -120,11 +123,8 @@ function CourseDetails({ userId }) {
                 formData.append('files', file);
                 formData.append('fileOrders', newFiles[index].order);
             })
-            console.log("Title:", course.title);
-            console.log("Chapter Title:", editedChapterTitle);
 
 
-            console.log("Saving updated chapter", formData);
             const response = await UpdateChapter(chapterId, formData);
             if (response?.error) {
                 toast.error(response.error);
@@ -150,7 +150,7 @@ function CourseDetails({ userId }) {
                     toast.success("Chapter deleted successfully");
                     window.location.reload();
                 }
-                console.log('Chapter deleted successfully');
+
             } catch (err) {
                 console.error('Error deleting chapter:', err);
             }
@@ -193,7 +193,7 @@ function CourseDetails({ userId }) {
                 courseId: course._id
             }
 
-            console.log("Saving updated file", newEditedFile);
+
             const response = await UpdateFile(fileId, newEditedFile);
             if (response?.error) {
                 toast.error(response.error);
@@ -331,8 +331,16 @@ function CourseDetails({ userId }) {
                             <Link to={`/addChapter/${course._id}`} state={{ title: course.title }}><Button label="Add Chapter" className="p-button-rounded" icon="pi pi-plus" /></Link>
                         </>
                     ) : (
-                        <Button icon="pi pi-shopping-cart" label="Buy Course" className="p-button-rounded" />
-                    )}
+                        enrolled ? (
+                            null
+                        ) : <div>
+                            <Button
+                                icon="pi pi-shopping-cart"
+                                label="Buy Course"
+                                onClick={() => onPay(course._id)}
+                                className="p-button-rounded"
+                            />
+                        </div>)}
                     {isEditing && (
                         <Button
                             icon="pi pi-save"

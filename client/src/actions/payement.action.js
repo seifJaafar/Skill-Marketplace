@@ -14,6 +14,32 @@ export async function createPaymentIntent(data) {
         return { error: error?.response?.data?.message };
     }
 }
+export async function createPaymentIntentCourse(data) {
+    try {
+        const response = await axios.post('/payment/create-payment-intent-course', data);
+        if (response.status === 201) {
+            return response.data;
+        } else {
+            return { error: response.data.message };
+        }
+    } catch (error) {
+        console.error(error?.response);
+        return { error: error?.response?.data?.message };
+    }
+}
+export async function saveEnrollment(data) {
+    try {
+        const response = await axios.post('/payment/saveEnrollment', data);
+        if (response.status === 201) {
+            return response.data;
+        } else {
+            return { error: response.data.message };
+        }
+    } catch (error) {
+        console.error(error?.response);
+        return { error: error?.response?.data?.message };
+    }
+}
 export async function requestRefund(data) {
     try {
         const response = await axios.post('/payment/refund', data);
