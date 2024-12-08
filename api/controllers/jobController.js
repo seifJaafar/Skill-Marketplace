@@ -12,9 +12,9 @@ const getJobsByclient = async (req, res) => {
         next(error);
     }
 }
-const getJobsByProvider = async (req, res) => {
+const getJobsByProvider = async (req, res, next) => {
     try {
-        const jobs = await Job.find({ providerId: req.user.sub }).populate('client').populate('skillPostId').populate('providerId');
+        const jobs = await Job.find({ providerId: req.user.sub }).populate('clientId').populate('skillPostId').populate('providerId');
         if (!jobs) {
             return res.status(200).json({ jobs: [] });
         }

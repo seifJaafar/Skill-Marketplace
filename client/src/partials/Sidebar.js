@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { SidebarContext } from './SidebarContext';
 import NavList from "./NavMenu";
 import "../assets/Sidebar.css";
-
-function SideBar() {
+import { Knob } from 'primereact/knob';
+function SideBar({ user }) {
     const [selected, setSelected] = useState('Dashboard');
     const { collapsed } = useContext(SidebarContext);
     const logout = () => {
@@ -31,12 +31,25 @@ function SideBar() {
                         </ul>
                     </div>
                     <div>
-                        <ul className="sidebar-nav" id="sidebar-nav">
+                        {user.role === "skillprovider" && (
+                            <ul className="sidebar-nav w-4" id="sidebar-nav">
+                                <li className={selected === "Settings" ? 'selected' : ''} >
+                                    <Knob value={user.points} readOnly max={1000} />
+                                </li>
+                            </ul>
+                        )}
 
+                        <ul className="sidebar-nav" id="sidebar-nav">
+                            <li className={selected === "Settings" ? 'selected' : ''}>
+                                <Link className="nav-link" to={`/profile/${user._id}`}>
+                                    <i className="fa-solid fa-user"></i>
+                                    <span>Profile</span>
+                                </Link>
+                            </li>
                             <li className={selected === "Settings" ? 'selected' : ''}>
                                 <Link className="nav-link" to="/profile">
                                     <i className="fa-solid fa-cog"></i>
-                                    <span>Profile</span>
+                                    <span>Account Settings</span>
                                 </Link>
                             </li>
                             <li className={selected === "logout" ? 'selected' : ''}>

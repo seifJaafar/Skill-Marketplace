@@ -4,8 +4,9 @@ import { useMediaQuery } from "react-responsive";
 import SkillPostsTable from "./SkillPostsTable";
 import AddSkillPost from "./AddSkillPost";
 import ShowSkillPosts from "./ShowSkillPosts";
+import Jobs from "../jobs/Jobs";
 import "../../assets/Profile.css";
-function SkillPost({ skills, name }) {
+function SkillPost({ skills, name, userRole }) {
     if (!skills) {
         skills = [];
     }
@@ -21,18 +22,20 @@ function SkillPost({ skills, name }) {
                             <ShowSkillPosts />
                         </div>
                     </Tab>
-                    <Tab eventKey="2" title={"My SkillPosts"} >
-                        <div className='header-fileInput'>
-                            <h1 style={{ fontWeight: "600" }}>Manage your SkillPosts</h1>
+                    {userRole === "skillprovider" && (
+                        <Tab eventKey="2" title={"My SkillPosts"} >
+                            <div className='header-fileInput'>
+                                <h1 style={{ fontWeight: "600" }}>Manage your SkillPosts</h1>
 
-                        </div>
-
-                        <SkillPostsTable />
-
-                    </Tab>
-                    <Tab eventKey="3" title={"Post SkillPost"} >
-                        <AddSkillPost skills={skills} name={name} />
-                    </Tab>
+                            </div>
+                            <SkillPostsTable />
+                        </Tab>
+                    )}
+                    {userRole === "skillprovider" && (
+                        <Tab eventKey="3" title={"Post SkillPost"} >
+                            <AddSkillPost skills={skills} name={name} />
+                        </Tab>
+                    )}
                 </Tabs>
             </div>
         </div>

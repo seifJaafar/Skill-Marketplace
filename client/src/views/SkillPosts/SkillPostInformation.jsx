@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { GetSkillPostById, UpdateSkillPost, LinkSkillPost } from "../../actions/skillPost.action";
 import { toast } from 'react-hot-toast';
 import { GetReviewsByUser, addReview } from "../../actions/review.action";
@@ -91,9 +91,11 @@ function SkillPostInformation({ userId }) {
     };
     const handleContact = async () => {
         try {
-            console.log("skillPost", skillPost)
             const response = await CreateConversation(skillPost.providerId);
-            console.log(response)
+            if (response) {
+                setTimeout(() => window.location.reload(), 2000);
+
+            }
         } catch (error) {
             console.error("Error creating conversation:", error);
             toast.error("Failed to create conversation.");
@@ -279,7 +281,10 @@ function SkillPostInformation({ userId }) {
                                 ) : (<h1>{skillPost.title}</h1>)
                                 }
                                 <div className="provider-infos">
-                                    <span>{skillPost.providerName || "unknown"}</span>
+                                    <Link style={{ color: "#C9E782", textDecoration: 'none' }} to={`/profile/${skillPost.providerId}`}>
+                                        <span>Skill Provider : {skillPost.providerName || "unknown"}</span>
+                                    </Link>
+
                                 </div>
                             </div>
                             <div className="description-section">

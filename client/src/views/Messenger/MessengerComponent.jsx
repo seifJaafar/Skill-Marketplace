@@ -81,7 +81,7 @@ function MessengerComponent({ user }) {
             conversations.forEach((conversation) => {
                 socket.emit('joinConversation', conversation._id);
                 socket.on('receiveMessage', (message) => {
-                    if (message.senderId !== user) {
+                    if (message.senderId !== user._id) {
                         setConversations((prevConversations) =>
                             prevConversations.map((conv) =>
                                 conv._id === selectedConversationId
@@ -127,7 +127,7 @@ function MessengerComponent({ user }) {
 
                 {toggleConversationList && (
                     <div className="conversation-list-wrapper">
-                        <ConversationList onConversationSelect={handleConversationSelect} userId={user} conversations={conversations} />
+                        <ConversationList onConversationSelect={handleConversationSelect} userId={user._id} conversations={conversations} />
                     </div>
                 )}
             </div>
@@ -145,7 +145,7 @@ function MessengerComponent({ user }) {
                                     icon="pi pi-times"
                                     className="p-button-text"
                                 />
-                                <MessageComponent conversationId={selectedConversationId} messages={messages} userId={user} onSendMessage={sendmessage} />
+                                <MessageComponent conversationId={selectedConversationId} messages={messages} userId={user._id} onSendMessage={sendmessage} />
                             </>
                         )}
                     </div>

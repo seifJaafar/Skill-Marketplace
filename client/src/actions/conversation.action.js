@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import axios from '../custom/axios';
 
 export async function GetConversations() {
@@ -17,6 +18,7 @@ export async function CreateConversation(providerId) {
     try {
         const response = await axios.post('/conversation', { providerId });
         if (response.status === 200) {
+            toast.success('Conversation created You can access it in the Conversations tab.');
             return response.data;
         } else {
             return { error: response.data.message };

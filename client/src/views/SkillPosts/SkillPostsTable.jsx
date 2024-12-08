@@ -101,7 +101,11 @@ function SkillPostsTable() {
         );
     }
     const TitleColumnValue = (row) => {
-        return `${row?.title}`;
+        if (row?.title && row?.title.length > 20) {
+            return `${row?.title.substring(0, 20) + "..."}`;
+        } else {
+            return `${row?.title}`;
+        }
     }
     const PriceColumnValue = (row) => {
         if (row?.price) {
@@ -183,7 +187,7 @@ function SkillPostsTable() {
                         <Column field="status" header="Status" headerClassName='custom-column-header' className='custom-table-cell' body={StatusColumnValue} />
                         <Column field="linkedUserId" header="Linked User" headerClassName='custom-column-header' className='custom-table-cell' body={LinkedUserColumnValue} />
                         <Column body={actionBodyTemplateDates} header="Dates" headerClassName='custom-column-header' className='custom-table-cell' />
-                        <Column body={viewMoreTemplate} header="View and Edit" headerClassName='custom-column-header' className='custom-table-cell' />
+                        <Column body={viewMoreTemplate} style={{width:"100%"}} header="View and Edit" headerClassName='custom-column-header' className='custom-table-cell' />
                     </DataTable>
                 </>
             )}

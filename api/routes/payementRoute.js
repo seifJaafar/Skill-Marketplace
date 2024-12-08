@@ -6,6 +6,7 @@ const authorize = require("../middelwares/auth")
 const roleAuthorize = require("../middelwares/roleAuth")
 router.route('/create-payment-intent').post(authorize(), payementController.createPaymentIntent);
 router.route('/mark-job-as-paid').post(authorize(), roleAuthorize(['admin', 'skillprovider', 'skillexpert']), payementController.markJobAsPaid);
-
+router.route('/mark-job-as-done').post(authorize(), roleAuthorize(['admin', 'skillprovider', 'skillexpert']), payementController.markJobAsDone);
+router.route('/refund').post(authorize(), roleAuthorize(['admin', 'skillprovider', 'skillexpert']), payementController.requestRefund);
 
 module.exports = router;

@@ -36,21 +36,32 @@ function Register() {
     useEffect(() => {
         fetchSkills();
     }, []);
-
+    const redirectClient = () => {
+        navigate("/clientdashboard");
+    }
     const onSubmit = async (data) => {
-        const skillsIds = data.skills.map(skill => skill.value);
-        const formData = {
-            ...data,
-            skills: skillsIds
-        };
+        let formData = { ...data };
+
+
+        if (selectedRole !== "client") {
+            const skillsIds = data.skills.map(skill => skill.value);
+            formData.skills = skillsIds;
+        } else {
+
+            delete formData.skills;
+        }
+
+
         if (selectedRole !== "skillexpert") {
             delete formData.githubProfile;
             delete formData.linkedinProfile;
         }
-        const user = await RegisterUser(formData);
+
+        const user = await RegisterUser(formData, redirectClient);
+
         if (user && user.user?.role === "skillprovider" && !user.user.quizCompleted) {
-            console.log("into navigate");
-            navigate(`/quiz/${skillsIds[0]}`, { state: { skills: skillsIds, userID: user.user._id } });
+            console.log("Navigating to quiz...");
+            navigate(`/quiz/${formData.skills[0]}`, { state: { skills: formData.skills, userID: user.user._id } });
         }
     };
 
@@ -187,6 +198,7 @@ function Register() {
                                             <DropdownMenu>
                                                 <DropdownItem onClick={() => { field.onChange("skillprovider"); setShownRole("Skill Provider"); setSelectedRole("skillprovider"); }}>Skill Provider</DropdownItem>
                                                 <DropdownItem onClick={() => { field.onChange("skillexpert"); setShownRole("Skill Expert"); setSelectedRole("skillexpert"); }}>Skill Expert</DropdownItem>
+                                                <DropdownItem onClick={() => { field.onChange("client"); setShownRole("Client"); setSelectedRole("client"); }}>Client</DropdownItem>
                                             </DropdownMenu>
                                         </Dropdown>
                                     )}
@@ -194,31 +206,34 @@ function Register() {
                                 {errors.role && <FormFeedback className="d-block">{errors.role.message}</FormFeedback>}
                             </FormGroup>
                         </div>
-                        <div className="col-md-6">
-                            <FormGroup>
-                                <Label for="skills">Skills</Label>
-                                <Controller
-                                    name="skills"
-                                    control={control}
-                                    defaultValue={[]}
-                                    rules={{
-                                        required: "Please select at least one skill",
-                                    }}
-                                    render={({ field }) => (
-                                        <Select
-                                            {...field}
-                                            options={skillsOptions}
-                                            name='skills'
-                                            isMulti
-                                            placeholder="Select your skills"
-                                            className="basic-multi-select"
-                                            classNamePrefix="select"
-                                        />
-                                    )}
-                                />
-                                {errors.skills && <FormFeedback className="d-block">{errors.skills.message}</FormFeedback>}
-                            </FormGroup>
-                        </div>
+                        {selectedRole !== "client" && (
+                            <div className="col-md-6">
+                                <FormGroup>
+                                    <Label for="skills">Skills</Label>
+                                    <Controller
+                                        name="skills"
+                                        control={control}
+                                        defaultValue={[]}
+                                        rules={{
+                                            required: "Please select at least one skill",
+                                        }}
+                                        render={({ field }) => (
+                                            <Select
+                                                {...field}
+                                                options={skillsOptions}
+                                                name='skills'
+                                                isMulti
+                                                placeholder="Select your skills"
+                                                className="basic-multi-select"
+                                                classNamePrefix="select"
+                                            />
+                                        )}
+                                    />
+                                    {errors.skills && <FormFeedback className="d-block">{errors.skills.message}</FormFeedback>}
+                                </FormGroup>
+                            </div>
+                        )}
+
                     </div>
 
                     {/* Conditionally render GitHub and LinkedIn fields for 'skillexpert' */}

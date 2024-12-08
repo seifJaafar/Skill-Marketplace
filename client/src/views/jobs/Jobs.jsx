@@ -3,6 +3,7 @@ import { Tab, Tabs } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import MyProjects from "./MyProjects";
+import MyWorkings from "./MyWorkings";
 import { loadStripe } from "@stripe/stripe-js";
 import { createPaymentIntent, markJobAsPaid } from "../../actions/payement.action";
 import { Dialog } from "primereact/dialog";
@@ -25,11 +26,8 @@ function Jobs() {
     const PopupSize = () => {
         switch (size) {
             case "xl":
-                return "500px";
             case "lg":
-                return "500px";
             case "md":
-                return "500px";
             case "sm":
                 return "500px";
             case "xs":
@@ -38,6 +36,7 @@ function Jobs() {
                 return "80%";
         }
     };
+
     useEffect(() => {
         if (!process.env.REACT_APP_STRIPE_PUBLISH_KEY) {
             console.error("Stripe public key is missing");
@@ -51,9 +50,11 @@ function Jobs() {
 
         initializeStripe();
     }, []);
-    function PaymentForm({ stripePromise, clientSecret, jobId, onSuccess }) {
+
+    const PaymentForm = ({ stripePromise, clientSecret, jobId, onSuccess }) => {
         const stripe = useStripe();
         const elements = useElements();
+
         const handleSubmitPayment = async () => {
             if (!stripe || !elements) return;
 
@@ -65,6 +66,7 @@ function Jobs() {
                     },
                     redirect: 'if_required'
                 });
+
                 console.log("Payment intent:", paymentIntent);
                 if (error) {
                     toast.error(error.message);
@@ -85,7 +87,7 @@ function Jobs() {
             <Dialog
                 visible={dialogVisible}
                 style={{ width: PopupSize() }}
-                header={'Payement Form'}
+                header={'Payment Form'}
                 modal
                 className="p-fluid"
                 onHide={() => { setDialogVisible(false); }}
@@ -96,7 +98,8 @@ function Jobs() {
                 </button>
             </Dialog>
         );
-    }
+    };
+
     const handlePayment = async (jobId) => {
         try {
             setJobId(jobId);
@@ -121,8 +124,9 @@ function Jobs() {
                     onSelect={(k) => setKey(k)}
                     className={`d-flex flex-wrap justify-content-center ${isMobile ? "flex-column mt-5" : ""}`}
                     style={{ maxWidth: "100%" }}
+                    id="job-tabs" // Add a unique ID to differentiate this Tabs component
                 >
-                    <Tab eventKey="1" title={"SkillPosts"}>
+                    <Tab eventKey="1" title={"My Byings"}>
                         <MyProjects onPay={handlePayment} />
                         {clientSecret && (
                             <Elements stripe={stripePromise} options={{ clientSecret }}>
@@ -134,6 +138,9 @@ function Jobs() {
                                 />
                             </Elements>
                         )}
+                    </Tab>
+                    <Tab eventKey="2" title={"My Workings"}>
+                        <MyWorkings />
                     </Tab>
                 </Tabs>
             </div>

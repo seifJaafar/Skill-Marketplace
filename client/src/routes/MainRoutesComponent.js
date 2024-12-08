@@ -2,17 +2,25 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Navigate, Routes } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import { GetUserByToken } from "../actions/user.action";
+import { useNavigate } from "react-router-dom";
 /*import "core-js/stable/atob"; */
 import { jwtDecode } from "jwt-decode";
 import Register from "../views/register/Register";
 import QuizComponent from "../views/quiz/QuizComponent";
 import Login from "../views/login/Login"
 import SkillProviderDashboard from "../views/Dashboards/SkillProviderDashboard";
+import ClientDashboard from "../views/Dashboards/ClientDashboard";
+import SkillExpertDashboard from "../views/Dashboards/SkillExpertDashboard";
 import SkillPost from "../views/SkillPosts/SkillPost";
 import SkillPostInformation from "../views/SkillPosts/SkillPostInformation";
 import ResetPassword from "../views/ResetPassword/ResetPassword";
 import Jobs from "../views/jobs/Jobs";
-
+import Profile from "../views/profile/Profile";
+import LeaderBoard from "../views/LeaderBoard/LeaderBoard";
+import PublicProfile from "../views/PublicProfile/PublicProfile";
+import Shop from "../views/courses/Shop";
+import CourseDetails from "../views/courses/CourseDetails";
+import AddChapter from "../views/courses/AddChapter";
 function MainRoutesComponent() {
   const [user, setUser] = useState({});
   const [is_connected, setIsConnected] = useState(false)
@@ -72,7 +80,8 @@ function MainRoutesComponent() {
       <BrowserRouter>
         {!is_connected && <NotSignedRoutes />}
         {is_connected && user && user.role === "skillprovider" && <SkillProviderRoutes user={user} />}
-        {/*is_connected && user && user.role == "employee" && <EmployeeRoutes user={user} /> */}
+        {is_connected && user && user.role === "client" && <ClientRoutes user={user} />}
+        {is_connected && user && user.role === "skillexpert" && <SkillExpertRoutes user={user} />}
       </BrowserRouter>
     </div>
   );
@@ -92,18 +101,69 @@ const NotSignedRoutes = () => {
     </Routes>
   );
 };
+const ClientRoutes = (props) => {
+  const { user } = props;
+  return (
+    <Routes>
+      <Route element={<ClientDashboard user={user} />} >
+        <Route path="/skillposts" element={<SkillPost skills={user.skills} name={user.username} userRole={user.role} />} />
+        <Route path="/skillpost/:id" element={<SkillPostInformation userId={user._id} />} />
+        <Route path="/profile/:id" element={<PublicProfile userId={user._id} />} />
+        <Route path="/profile" element={<Profile user={user} />} />
+        <Route path="/jobs" element={<Jobs />} />
+        <Route path="/leaderboard" element={<LeaderBoard user={user} />} />
+        <Route path="/*" element={<Navigate to="/shop" />} />
+      </Route>
+    </Routes>
+  );
+}
+
+const SkillExpertRoutes = (props) => {
+  const { user } = props;
+  return (
+    <Routes>
+      <Route element={<SkillExpertDashboard user={user} />} >
+        <Route path="/skillposts" element={<SkillPost skills={user.skills} name={user.username} userRole={user.role} />} />
+        <Route path="/skillpost/:id" element={<SkillPostInformation userId={user._id} />} />
+        <Route path="/jobs" element={<Jobs />} />
+        <Route path="/profile/:id" element={<PublicProfile userId={user._id} />} />
+        <Route path="/profile" element={<Profile user={user} />} />
+        <Route path="/quiz/:skillID" element={<QuizComponent />} />
+        <Route path="/leaderboard" element={<LeaderBoard user={user} />} />
+        <Route path="/shop" element={<Shop user={user} />} />
+        <Route path="/course/:id" element={<CourseDetails userId={user._id} />} />
+        <Route path="/addChapter/:id" element={<AddChapter userId={user._id} />} />
+        <Route path="/*" element={<Navigate to="/skillposts" />} />
+      </Route>
+    </Routes>
+
+  )
+}
 const SkillProviderRoutes = (props) => {
   const { user } = props;
+  const navigate = useNavigate();
+  useEffect(() => {
+    // Check if user has pending skills in localStorage and if quizCompleted is false
+    const pendingSkills = JSON.parse(localStorage.getItem("pendingSkills"));
+    if (pendingSkills && pendingSkills.length > 0 && !user.quizCompleted) {
+      navigate(`/quiz/${pendingSkills[0]}`, { state: { skills: pendingSkills, userID: user._id } });
+    }
+  }, [user]);
 
   return (
     <Routes>
-      <Route element={<SkillProviderDashboard user={user._id} />} >
-        <Route path="/skillposts" element={<SkillPost skills={user.skills} name={user.username} />} />
+      <Route element={<SkillProviderDashboard user={user} />} >
+        <Route path="/skillposts" element={<SkillPost skills={user.skills} name={user.username} userRole={user.role} />} />
         <Route path="/skillpost/:id" element={<SkillPostInformation userId={user._id} />} />
         <Route path="/jobs" element={<Jobs />} />
+        <Route path="/profile/:id" element={<PublicProfile userId={user._id} />} />
+        <Route path="/profile" element={<Profile user={user} />} />
+        <Route path="/quiz/:skillID" element={<QuizComponent />} />
+        <Route path="/leaderboard" element={<LeaderBoard user={user} />} />
+        <Route path="/shop" element={<Shop user={user} />} />
+        <Route path="/course/:id" element={<CourseDetails userId={user._id} />} />
         <Route path="/*" element={<Navigate to="/skillposts" />} />
       </Route>
-
     </Routes>
   );
 };

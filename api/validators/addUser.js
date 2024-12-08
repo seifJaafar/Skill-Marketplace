@@ -1,6 +1,6 @@
 const joi = require('joi');
 
-const roles = ['admin', 'skillprovider', 'skillexpert'];
+const roles = ['admin', 'skillprovider', 'skillexpert', 'client'];
 const objectIdRegex = /^[0-9a-fA-F]{24}$/;
 
 const schema = joi.object({
@@ -15,17 +15,22 @@ const schema = joi.object({
     'string.pattern.base': 'Phone must contain only numbers'
   }),
   approved: joi.boolean().default(false),
-  skills: joi.array().items(
-    joi.string().pattern(objectIdRegex).required().messages({
-      'string.pattern.base': 'Each skill ID must be a valid ObjectId',
-      'string.base': 'Each skill ID must be a string',
-    })
-  ).required().messages({
-    'array.base': 'Skills must be an array',
-    'array.includesRequiredUnknowns': 'Skills array cannot be empty',
-  }),
-
-
+  skills: joi.array()
+    .items(
+      joi.string().pattern(objectIdRegex).required().messages({
+        'string.pattern.base': 'Each skill ID must be a valid ObjectId',
+        'string.base': 'Each skill ID must be a string',
+      })
+    )
+    .when('role', {
+      is: joi.valid('skillprovider', 'skillexpert'),
+      then: joi.required().messages({
+        'array.base': 'Skills must be an array',
+        'array.includesRequiredUnknowns': 'Skills array cannot be empty',
+        'any.required': 'Skills are required for skillprovider or skillexpert roles',
+      }),
+      otherwise: joi.optional(),
+    }),
   githubProfile: joi.when('role', {
     is: 'skillexpert',
     then: joi.string()

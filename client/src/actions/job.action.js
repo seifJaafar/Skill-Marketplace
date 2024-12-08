@@ -17,8 +17,9 @@ export async function GetJobsByClient() {
 export async function GetJobsByProvider() {
     try {
         const response = await axios.get(`/job/byProvider`);
+        console.log(response)
         if (response.status === 200) {
-            return response.data.jobs;
+            return response.data;
 
         } else {
             return { error: response.data.message };

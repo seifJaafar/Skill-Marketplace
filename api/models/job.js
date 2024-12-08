@@ -12,13 +12,14 @@ const JobSchema = new mongoose.Schema({
         enum: ['pending', 'released', 'refunded'],
         default: 'pending'
     },
-  
+    escrowPaymentTransferred: { type: Boolean, default: false }, // Escrow payment status
     providerCompleted: { type: Boolean, default: false }, // Provider's completion status
     clientCompleted: { type: Boolean, default: false }, // Client's completion status
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
     completedAt: { type: Date }, // When the job is marked as completed
-    cancelledAt: { type: Date }, // When the job is marked as cancelled
+    cancelledAt: { type: Date },
+    clientRefunded: { type: Boolean, default: false } // When the job is marked as cancelled
 });
 
 const Job = mongoose.model('Job', JobSchema);

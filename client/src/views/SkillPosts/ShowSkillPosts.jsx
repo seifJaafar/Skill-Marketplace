@@ -3,7 +3,7 @@ import { DataView } from "primereact/dataview";
 import { Button } from "primereact/button";
 import { classNames } from 'primereact/utils';
 import { Dropdown } from 'primereact/dropdown';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GetReviewsByUser } from "../../actions/review.action";
 import { InputText } from 'primereact/inputtext';
 import "../../assets/ShowSkillPosts.css";
@@ -175,10 +175,13 @@ function ShowSkillPosts() {
                             <Badge>{skillpost.suggestions} propositions</Badge>
                         </div>
                         <div className="text-sm text-500 mt-1">
-                            Posted by: <span className="font-semibold">{skillpost.providerName || 'Anonymous'}</span>
+                            {skillpost.providerId ?
+                                <span className="font-semibold">Posted by:<Link to={`/profile/${skillpost.providerId}`}>{skillpost.providerName || 'Anonymous'}</Link></span>
+                                : <span className="font-semibold">Posted by: Anonymous</span>
+                            }
                             {skillpost.averageRating > 0 && (
                                 <>
-                                    <i className="pi pi-star-fill ml-3" style={{ color: '#C9E782' }}></i>
+                                    <i className="pi pi-star-fill ml-2" style={{ color: '#C9E782' }}></i>
                                     <span className="ml-2">
                                         {skillpost.averageRating.toFixed(1)} ({skillpost.totalReviews} reviews)
                                     </span>

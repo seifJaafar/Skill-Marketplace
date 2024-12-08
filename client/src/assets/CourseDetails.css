@@ -1,0 +1,137 @@
+.banner {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    /* Dark overlay */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    gap: 20px;
+    padding: 20px;
+}
+
+.banner-overlay a {
+    text-decoration: none;
+    color: #C9E782 !important;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.course-title {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #fff;
+}
+
+.tags-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.p-tag-rounded {
+    background-color: #f1c40f;
+    /* Example color */
+    color: #fff;
+    font-weight: bold;
+}
+
+.desc_container {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    margin-bottom: 30px;
+
+    margin-left: 20px;
+    text-align: left;
+    padding: 20px;
+    margin-top: 30px;
+
+    border-radius: 8px;
+
+    background-color: #f8f8f8;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+.desc_container p {
+    color: #1E1F2A;
+    font-size: 1.1rem;
+
+    margin: 0;
+    margin-bottom: 15px;
+
+    margin-top: 5px;
+
+    line-height: 1.5;
+
+    word-wrap: break-word;
+
+
+}
+
+/* Custom header for AccordionTab */
+.custom-tab-header {
+    color: #1E1F2A !important;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Style active tab */
+.ui-accordion .ui-accordion-header.ui-state-active .custom-tab-header {
+    color: #ff9800;
+    /* Color for active tab */
+}
+
+/* Chapter files styling */
+.file-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.p-accordion-header-link {
+    text-decoration: none !important;
+}
+
+.price_container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    gap: 10px;
+}
+
+.price_container span {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #1E1F2A;
+}
+
+.file-icon {
+    font-size: 1.2rem;
+    color: #007bff;
+    /* Icon color */
+}

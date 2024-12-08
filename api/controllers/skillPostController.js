@@ -1,3 +1,4 @@
+const User = require('../models/User');
 const SkillPost = require('../models/skillPost');
 const Job = require('../models/job');
 const mongoose = require('mongoose');
@@ -9,6 +10,13 @@ exports.addSkillPost = async (req, res) => {
         let { title, description, skillCategory, skillLevel, exchangeSkill, providerName } = req.body;
 
         const providerId = req.user.sub;
+        const user = await User.findById(providerId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        if (!user.stripeAccountId) {
+            return res.status(400).json({ message: 'Please connect your stripe account first' });
+        }
         skillCategory = new mongoose.Types.ObjectId(skillCategory);
         exchangeSkill = new mongoose.Types.ObjectId(exchangeSkill);
         const newSkillPost = new SkillPost({
@@ -70,10 +78,11 @@ exports.linkUserToSkillPost = async (req, res) => {
             return res.status(400).json({ message: 'Invalid Skill Post ID' });
         }
         const { linkedUserId } = req.body;
+
         if (!mongoose.Types.ObjectId.isValid(linkedUserId)) {
             return res.status(400).json({ message: 'Invalid Linked User ID' });
         }
-
+        const client = await User.findById(linkedUserId);
         const skillPost = await SkillPost.findById(skillPostId);
         if (!skillPost) {
             return res.status(404).json({ message: 'Skill Post not found' });
@@ -92,6 +101,13 @@ exports.linkUserToSkillPost = async (req, res) => {
         if (skillPost.offerType === 'exchange' && !skillPost.exchangeSkill) {
             return res.status(400).json({ message: 'Exchange skill cannot be null for exchange offers' });
         }
+        if (skillPost.offerType === 'exchange' && client.role !== 'skillprovider') {
+            return res.status(400).json({ message: 'Client must be a skill provider for exchange offers' });
+        }
+        if (skillPost.offerType === 'exchange' && !client.skills.includes(skillPost.exchangeSkill)) {
+            return res.status(400).json({ message: 'Client does not have the required skill for exchange' });
+        }
+
 
         // Create the job first
         const job = new Job({

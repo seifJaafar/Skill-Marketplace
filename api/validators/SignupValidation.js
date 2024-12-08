@@ -1,34 +1,46 @@
 const joi = require('joi');
 
-const roles = ['admin', 'skillprovider', 'skillexpert'];
+const roles = ['admin', 'skillprovider', 'skillexpert', 'client'];
 const objectIdRegex = /^[0-9a-fA-F]{24}$/;
 
 const schema = joi.object({
-  email: joi.string().email().required(),
+  email: joi.string().email().required().messages({
+    'string.email': 'Email must be a valid email address',
+    'any.required': 'Email is required',
+  }),
   role: joi.string().valid(...roles).required().messages({
-    'any.only': 'Invalid role'
+    'any.only': 'Role must be one of admin, skillprovider, skillexpert, or client',
+    'any.required': 'Role is required',
   }),
   username: joi.string().pattern(/^[a-zA-Z\s]+$/).required().messages({
     'string.pattern.base': 'Username must contain only letters',
+    'any.required': 'Username is required',
   }),
   phone: joi.string().pattern(/^[0-9]+$/).required().messages({
-    'string.pattern.base': 'Phone must contain only numbers'
+    'string.pattern.base': 'Phone must contain only numbers',
+    'any.required': 'Phone is required',
   }),
   approved: joi.boolean().default(false),
   password: joi.string().min(4).required().messages({
-    'string.min': 'Password must be at least 4 characters long'
+    'string.min': 'Password must be at least 4 characters long',
+    'any.required': 'Password is required',
   }),
-  skills: joi.array().items(
-    joi.string().pattern(objectIdRegex).required().messages({
-      'string.pattern.base': 'Each skill ID must be a valid ObjectId',
-      'string.base': 'Each skill ID must be a string',
-    })
-  ).required().messages({
-    'array.base': 'Skills must be an array',
-    'array.includesRequiredUnknowns': 'Skills array cannot be empty',
-  }),
-
-  // Conditional validation for GitHub and LinkedIn profiles
+  skills: joi.array()
+    .items(
+      joi.string().pattern(objectIdRegex).required().messages({
+        'string.pattern.base': 'Each skill ID must be a valid ObjectId',
+        'string.base': 'Each skill ID must be a string',
+      })
+    )
+    .when('role', {
+      is: joi.valid('skillprovider', 'skillexpert'),
+      then: joi.required().messages({
+        'array.base': 'Skills must be an array',
+        'array.includesRequiredUnknowns': 'Skills array cannot be empty',
+        'any.required': 'Skills are required for skillprovider or skillexpert roles',
+      }),
+      otherwise: joi.optional(),
+    }),
   githubProfile: joi.when('role', {
     is: 'skillexpert',
     then: joi.string()
@@ -36,11 +48,11 @@ const schema = joi.object({
       .required()
       .messages({
         'string.empty': 'GitHub profile link is required for skill experts',
-        'string.pattern.base': 'GitHub profile link must be a valid GitHub URL (e.g., https://github.com/username)'
+        'string.pattern.base': 'GitHub profile link must be a valid GitHub URL (e.g., https://github.com/username)',
+        'any.required': 'GitHub profile link is required for skillexpert role',
       }),
-    otherwise: joi.optional()
+    otherwise: joi.optional(),
   }),
-
   linkedinProfile: joi.when('role', {
     is: 'skillexpert',
     then: joi.string()
@@ -48,10 +60,11 @@ const schema = joi.object({
       .required()
       .messages({
         'string.empty': 'LinkedIn profile link is required for skill experts',
-        'string.pattern.base': 'LinkedIn profile link must be a valid LinkedIn URL (e.g., https://www.linkedin.com/in/username)'
+        'string.pattern.base': 'LinkedIn profile link must be a valid LinkedIn URL (e.g., https://www.linkedin.com/in/username)',
+        'any.required': 'LinkedIn profile link is required for skillexpert role',
       }),
-    otherwise: joi.optional()
-  })
+    otherwise: joi.optional(),
+  }),
 });
 
 module.exports = schema;

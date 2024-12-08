@@ -12,8 +12,11 @@ const conversationRoute = require('./routes/conversationRoute');
 const messageRoute = require('./routes/messageRoute');
 const jobRoute = require('./routes/jobRoute');
 const payementRoute = require('./routes/payementRoute');
+const webhookRoute = require('./routes/webhookRoute');
+const coursesRoute = require('./routes/coursesRoute');
 const http = require('http');
 const socketIo = require('socket.io');
+const path = require('path');
 
 dotenv.config();
 
@@ -22,10 +25,14 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',').map(origin => orig
 app.use(cors({
     origin: allowedOrigins
 }));
-
+app.use('/webhook', express.raw({ type: 'application/json' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(express.static(path.join(__dirname, 'public')));
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    next();
+})
 /*--------------DB---------------*/
 connectDB();
 
@@ -39,11 +46,14 @@ app.use('/conversation', conversationRoute);
 app.use('/message', messageRoute);
 app.use('/job', jobRoute);
 app.use('/payment', payementRoute);
+app.use('/webhook', webhookRoute);
+app.use('/courses', coursesRoute);
 /*------------------ERROR HANDLING-------------------*/
 app.use((err, req, res, next) => {
     const { status = 500 } = err;
     if (!err.message) { err.message = "Something went wrong" }
     res.status(status).json({ message: err.message })
+    console.log(err);
 })
 
 /*--------------SERVER START WITH SOCKET.IO---------------*/

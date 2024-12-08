@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { GetQuiz, SubmitQuizResult } from '../../actions/quiz.action';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { UpdatePendingSkills } from '../../actions/user.action';
 import "./quiz.css";
 
 function QuizComponent() {
@@ -19,6 +20,22 @@ function QuizComponent() {
   useEffect(() => {
     fetchQuiz();
   }, [skillID]);
+  const handleUnload = async (event) => {
+    const remainingSkills = skills.slice(currentSkillIndex);
+    if (remainingSkills.length > 0) {
+      localStorage.setItem("pendingSkills", JSON.stringify(remainingSkills));
+    }
+  };
+
+  useEffect(() => {
+
+    window.addEventListener("beforeunload", handleUnload);
+
+
+    return () => {
+      window.removeEventListener("beforeunload", handleUnload);
+    };
+  }, [skills, currentSkillIndex]);
 
   const fetchQuiz = async () => {
     try {
@@ -63,7 +80,7 @@ function QuizComponent() {
 
   const handleNextQuiz = async () => {
     const nextSkillIndex = currentSkillIndex + 1;
-    let quizScore = calculateScore(); // Calculate score before navigating
+    let quizScore = calculateScore();
     console.log("Quiz Score: ", quizScore);
     try {
       const response = await SubmitQuizResult({
@@ -82,7 +99,8 @@ function QuizComponent() {
         setCurrentQuestionIndex(0);
         navigate(`/quiz/${skills[nextSkillIndex]}`, { state: { skills, userID } });
       } else {
-        navigate("/login");  // Redirect to login or any other page after all quizzes
+        localStorage.removeItem("pendingSkills");
+        navigate("/login");
       }
     } catch (error) {
       console.error(error.response?.data?.message || error.message);
@@ -99,6 +117,7 @@ function QuizComponent() {
   if (!quizData) return <div>Loading...</div>;
 
   const currentQuestion = quizData.questions[currentQuestionIndex];
+
 
   return (
     <div className="quiz-container">

@@ -8,7 +8,7 @@ function SkillProviderDashboard({ user }) {
     return (
         <>
             <SidebarProvider>
-                <SideBar />
+                <SideBar user={user} />
                 <Outlet />
                 <MessengerComponent user={user} />
             </SidebarProvider>

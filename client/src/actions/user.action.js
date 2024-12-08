@@ -15,16 +15,69 @@ export async function GetUserByToken() {
     return { error: error?.response?.data?.message };
   }
 }
-export async function GetAllUsers() {
+
+export async function UpdatePass(user) {
   try {
-    const response = await axios.get(`/auth/users`);
+    const response = await axios.patch(`/auth/updatePassword`, user);
+    if (response.status === 200) {
+      toast.success("Password Updated", {});
+      return { user: response.data.data.user };
+    } else {
+      toast.error(response?.error);
+    }
+  } catch (err) {
+    if (err?.response) {
+      toast.error(err?.response?.data.error);
+    }
+    return { error: err?.response?.data?.message };
+  }
+}
+export async function UpdatePendingSkills(user) {
+  try {
+    const response = await axios.patch(`/auth/updatePendingSkills`, user);
+    if (response.status === 200) {
+      toast.success("Skills Updated", {});
+      return { user: response.data.data.user };
+    } else {
+      toast.error(response?.message);
+    }
+  } catch (err) {
+    if (err?.response) {
+      toast.error(err?.response?.data.message);
+    }
+    return { error: err?.response?.data?.message };
+  }
+}
+export async function UpdateUser(user) {
+  try {
+    const response = await axios.patch(`/auth/updateAccount`, user, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      }
+    });
+    if (response.status === 200) {
+      toast.success("Account Updated", {});
+      return { user: response.data.data.user };
+    } else {
+      toast.error(response?.message);
+    }
+  } catch (err) {
+    if (err?.response) {
+      toast.error(err?.response?.data.message);
+    }
+    return { error: err?.response?.data?.message };
+  }
+}
+export async function GetAllUsers(query) {
+  try {
+    const response = await axios.get(`/auth/users`, { params: { query } });
     return response.data.data.users;
   } catch (error) {
     console.error(error?.response);
     return { error: error?.response?.data?.message };
   }
 }
-export async function RegisterUser(Newuser,) {
+export async function RegisterUser(Newuser,redirect) {
   try {
     const response = await axios.post(`/auth/register`, Newuser);
     if (response.status === 200) {
@@ -33,7 +86,13 @@ export async function RegisterUser(Newuser,) {
 
         return { user: response.data.data.user };
       } else {
-        toast.success("Please wait for approval !", {});
+        if (response.data.data.user.role === "skillexpert") {
+          toast.success("Please wait for approval !", {});
+        } else if (response.data.data.user.role === "client") {
+          toast.success("Welcome !", {});
+          redirect();
+        }
+
 
         return { user: response.data.data.user };
       }
@@ -86,5 +145,28 @@ export async function ResetPass(email, callback) {
       toast.error(err?.response?.data.message);
     }
     return { error: err?.response?.data?.message };
+  }
+}
+export async function connectStripeAccount() {
+  try {
+    const response = await axios.post(`/auth/connectStripe`);
+    if (response.data?.url) {
+      window.location.href = response.data.url; // Redirect the user to the Stripe onboarding URL
+    } else {
+      console.error('No URL provided in response');
+    }
+  } catch (error) {
+    console.error(error?.response);
+    return { error: error?.response?.data?.message };
+  }
+}
+export async function getUserById(id) {
+  try {
+    const response = await axios.get(`/auth/${id}`);
+    console.log(response.data.data.user);
+    return response.data.data.user;
+  } catch (error) {
+    console.error(error?.response);
+    return { error: error?.response?.data?.message };
   }
 }

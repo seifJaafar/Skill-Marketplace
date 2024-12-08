@@ -16,7 +16,7 @@ function AddQuestion() {
             const response = await GetQuizzes();
             if (response) {
                 console.log(response)
-                const quizesWithoutQuestions = response.filter(quiz => !quiz.questions.length > 0);
+                const quizesWithoutQuestions = response.filter(quiz => quiz.questions.length < 5);
                 const quizes = quizesWithoutQuestions.map(quiz => ({ value: quiz._id, label: quiz.title }));
                 setQuizesData(quizes);
             } else {

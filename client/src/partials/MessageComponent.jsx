@@ -11,7 +11,7 @@ function MessageComponent({ conversationId, userId, onSendMessage, messages }) {
 
     const [newMessage, setNewMessage] = useState('');
     const [loading, setLoading] = useState(true);
-
+    console.log(userId, 'userId')
     const handleSendMessage = async () => {
         if (!newMessage.trim()) { return };
         const message = {

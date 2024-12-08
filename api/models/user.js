@@ -20,6 +20,22 @@ const UserSchema = new Schema({
         required: true,
         index: { unique: true }
     },
+    avatar: {
+        type: String,  // Stores the URL or file path of the avatar image
+        default: 'uploads/avatars/default-avatar.png',
+    },
+    resume: {
+        type: String,  // Stores the file path or URL for the resume
+        default: null,
+    },
+    websiteLink: {
+        type: String,  // Stores the user's website link
+        default: null,
+    },
+    bio: {
+        type: String,  // Stores the user's bio
+        default: null,
+    },
     phone: {
         type: String,
         index: true,
@@ -34,7 +50,7 @@ const UserSchema = new Schema({
     role: {
         type: String,
         required: true,
-        enum: ['skillprovider', 'skillexpert', 'admin']
+        enum: ['skillprovider', 'skillexpert', 'admin', 'client']
     }
     ,
     approved: {
@@ -72,7 +88,16 @@ const UserSchema = new Schema({
             return this.role === 'skillexpert';
         },
         message: "Linekdin profile link is required for skill experts"
-    }
+    },
+    stripeAccountId: {
+        type: String,
+        default: null
+    },
+    tempStripeAccountId: {
+        type: String,
+        default: null
+    },
+    enrollments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Enrollment' }]
 }
 
 )
